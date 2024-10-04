@@ -3,7 +3,6 @@
 ## Setup Environment - Shell/Terminal
 ```
 cd proyek_analisis_data
-pipenv install
 pipenv shell
 pipenv install -r requirements.txt
 ```
