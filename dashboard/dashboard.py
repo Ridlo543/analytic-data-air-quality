@@ -19,36 +19,41 @@ def load_data():
 
 df = load_data()
 
-# Sidebar
-st.sidebar.title("Dashboard Analisis Kualitas Udara Wanshouxigong")
-st.sidebar.markdown("Jelajahi tren dan pola kualitas udara.")
+with st.sidebar:
+    st.title("Dashboard Analisis Kualitas Udara Wanshouxigong")
+    st.markdown("Jelajahi tren dan pola kualitas udara.")
+
+    # Pilihan pertanyaan
+    question = st.sidebar.selectbox(
+        "Pilih pertanyaan analisis:",
+        [
+            "1. Bagaimana tren PM2.5 dan PM10 selama periode waktu dataset?",
+            "2. Apakah ada pola harian dalam tingkat polutan udara?",
+            "3. Bagaimana curah hujan mempengaruhi konsentrasi polutan udara?",
+            "4. Berapa banyak pola kualitas udara yang berbeda dapat diidentifikasi?",
+            "5. Apakah ada perbedaan signifikan dalam pola kualitas udara antara musim panas, gugur, semi, dan musim dingin?",
+            "6. Bagaimana tren kualitas udara dari tahun ke tahun?",
+            "7. Apakah ada pola mingguan dalam kualitas udara?",
+            "8. Bagaimana hubungan antara berbagai polutan?",
+        ],
+    )
+
+    # Pemilih rentang tanggal
+    start_date = st.date_input("Tanggal Mulai", df["date"].min())
+    end_date = st.date_input("Tanggal Akhir", df["date"].max())
+
+    # Informasi pembuat
+    st.markdown("---")  # Garis pemisah
+    st.markdown("### Informasi Pembuat")
+    st.markdown("**Nama:** Ridlo Abdullah Ulinnuha")
+    st.markdown("**Email:** ridloabdullahulinnuha543@gmail.com")
 
 # Main area
 st.title("Analisis Kualitas Udara Wanshouxigong")
 
-# Pilihan pertanyaan
-question = st.sidebar.selectbox(
-    "Pilih pertanyaan analisis:",
-    [
-        "1. Bagaimana tren PM2.5 dan PM10 selama periode waktu dataset?",
-        "2. Apakah ada pola harian dalam tingkat polutan udara?",
-        "3. Bagaimana curah hujan mempengaruhi konsentrasi polutan udara?",
-        "4. Berapa banyak pola kualitas udara yang berbeda dapat diidentifikasi?",
-        "5. Apakah ada perbedaan signifikan dalam pola kualitas udara antara musim panas, gugur, semi, dan musim dingin?",
-        "6. Bagaimana tren kualitas udara dari tahun ke tahun?",
-        "7. Apakah ada pola mingguan dalam kualitas udara?",
-        "8. Bagaimana hubungan antara berbagai polutan?",
-    ],
-)
-
-# Pemilih rentang tanggal
-start_date = st.sidebar.date_input("Tanggal Mulai", df["date"].min())
-end_date = st.sidebar.date_input("Tanggal Akhir", df["date"].max())
-
 # Filter data berdasarkan rentang tanggal
 mask = (df["date"].dt.date >= start_date) & (df["date"].dt.date <= end_date)
 df_filtered = df.loc[mask]
-
 
 # Fungsi untuk setiap pertanyaan
 def question_1():
@@ -536,7 +541,3 @@ elif question.startswith("7."):
     question_7()
 elif question.startswith("8."):
     question_8()
-
-# Footer
-st.sidebar.markdown("---")
-st.sidebar.markdown("Dashboard dibuat menggunakan Streamlit")
