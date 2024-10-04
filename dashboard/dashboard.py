@@ -23,6 +23,9 @@ df = load_data()
 st.sidebar.title("Dashboard Analisis Kualitas Udara Wanshouxigong")
 st.sidebar.markdown("Jelajahi tren dan pola kualitas udara.")
 
+# Main area
+st.title("Analisis Kualitas Udara Wanshouxigong")
+
 # Pilihan pertanyaan
 question = st.sidebar.selectbox(
     "Pilih pertanyaan analisis:",
